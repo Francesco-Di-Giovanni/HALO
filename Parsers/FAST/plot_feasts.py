@@ -183,15 +183,37 @@ def plot_integrated_spectrum(data, vel_kms, galaxy, plots_dir):
     # Annotate peak
     idx = np.argmax(integrated)
     ax.annotate(
-        f'Peak: {integrated[idx]:.1f}\nv={vel_kms[idx]:.1f} km/s',
+        f'Peak: {integrated[idx]:.1f}\nv={vel_kms[idx]:.1f} km/s\n{1420.405752 * (1 - vel_kms[idx] / 299792.458):.4f} MHz',
         xy=(vel_kms[idx], integrated[idx]),
         xytext=(vel_kms[idx] + 60, integrated[idx] * 0.85),
         arrowprops=dict(arrowstyle='->', color='yellow'),
         color='yellow', fontsize=9
     )
+    # Secondary frequency axis (GHz)
+    f0_ghz = 1.420405752  # HI rest frequency GHz
+    ax2 = ax.twiny()
+    ax2.set_xlim(ax.get_xlim())
+    v_ticks = ax.get_xticks()
+    f_ticks = f0_ghz * (1 - v_ticks / 299792.458)
+    ax2.set_xticks(v_ticks)
+    ax2.set_xticklabels([f'{f:.4f}' for f in f_ticks], fontsize=7, color='white')
+    ax2.set_xlabel('Frequency (GHz)', color='white')
+    ax2.tick_params(colors='white')
+    ax2.spines['top'].set_color('white')
+    # Secondary frequency axis (GHz)
+    f0_ghz = 1.420405752  # HI rest frequency GHz
+    ax2 = ax.twiny()
+    ax2.set_xlim(ax.get_xlim())
+    v_ticks = ax.get_xticks()
+    f_ticks = f0_ghz * (1 - v_ticks / 299792.458)
+    ax2.set_xticks(v_ticks)
+    ax2.set_xticklabels([f'{f:.4f}' for f in f_ticks], fontsize=7, color='white')
+    ax2.set_xlabel('Frequency (GHz)', color='white')
+    ax2.tick_params(colors='white')
+    ax2.spines['top'].set_color('white')
     plt.tight_layout()
-    outpath = os.path.join(plots_dir, f'{galaxy}_integrated_spectrum.png')
-    plt.savefig(outpath, dpi=150, facecolor='black')
+    outpath = os.path.join(plots_dir, f'{galaxy}_integrated_spectrum.svg')
+    plt.savefig(outpath, facecolor="black")
     plt.close()
     print(f"  Saved: {outpath}")
 
@@ -211,11 +233,16 @@ def plot_pv_diagram(data, vel_kms, header, galaxy, plots_dir):
     fig, ax = plt.subplots(figsize=(10, 6))
     fig.patch.set_facecolor('black')
     ax.set_facecolor('black')
-    vmin = np.nanpercentile(pv, 1)
-    vmax = np.nanpercentile(pv, 99)
+    import matplotlib.colors as mcolors
+    noise_region = pv[:200, :]
+    sigma = np.nanstd(noise_region)
+    pv_masked = np.where(pv > 3*sigma, pv, np.nan)
+    pv_pos = pv_masked[np.isfinite(pv_masked)]
+    vmin = np.percentile(pv_pos, 1)
+    vmax = np.percentile(pv_pos, 99.5)
     im = ax.imshow(
-        pv, origin='lower', aspect='auto', cmap='inferno',
-        vmin=max(vmin, 0), vmax=vmax,
+        pv_masked, origin='lower', aspect='auto', cmap='inferno',
+        norm=mcolors.PowerNorm(gamma=0.45, vmin=vmin, vmax=vmax),
         extent=[pix_offset[0], pix_offset[-1], vel_kms[0], vel_kms[-1]]
     )
     cb = plt.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
@@ -234,6 +261,55 @@ def plot_pv_diagram(data, vel_kms, header, galaxy, plots_dir):
     plt.close()
     print(f"  Saved: {outpath}")
 
+
+
+def plot_centre_spectrum(data, vel_kms, header, galaxy, plots_dir):
+    """Spectrum extracted from the central pixel of the galaxy."""
+    naxis1 = header['NAXIS1']
+    naxis2 = header['NAXIS2']
+    cx = naxis1 // 2
+    cy = naxis2 // 2
+    spec = data[:, cy, cx]
+
+    # Literature systemic velocity (heliocentric) and measured peak
+    v_sys_lit = 657.0   # km/s heliocentric (NGC 628)
+    idx_peak  = np.argmax(spec)
+    v_peak    = vel_kms[idx_peak]
+    s_peak    = spec[idx_peak]
+
+    fig, ax = plt.subplots(figsize=(10, 5))
+    fig.patch.set_facecolor('white')
+    ax.set_facecolor('white')
+    ax.plot(vel_kms, spec, color='steelblue', linewidth=1.0)
+    ax.axvline(v_sys_lit, color='gray',  linewidth=1.2, linestyle='--',
+               label=f'v_sys={v_sys_lit:.0f} km/s (literature, heliocentric)')
+    ax.axvline(v_peak,    color='red',   linewidth=1.2, linestyle='--',
+               label=f'Peak measured={v_peak:.1f} km/s (barycentric)')
+    ax.annotate(
+        f'{s_peak:.4f} Jy/beam\n{1420.405752 * (1 - v_peak / 299792.458):.4f} MHz',
+        xy=(v_peak, s_peak),
+        xytext=(v_peak + 60, s_peak * 0.85),
+        arrowprops=dict(arrowstyle='->', color='red'),
+        color='red', fontsize=9
+    )
+    ax.set_xlabel('LSR velocity (km/s)')
+    ax.set_ylabel('Jy/beam')
+    ax.set_title(f'{galaxy} - FEASTS FAST HI spectrum (centre)')
+    ax.legend(fontsize=8)
+    # Secondary frequency axis (GHz)
+    f0_ghz = 1.420405752  # HI rest frequency GHz
+    ax2 = ax.twiny()
+    ax2.set_xlim(ax.get_xlim())
+    v_ticks = ax.get_xticks()
+    f_ticks = f0_ghz * (1 - v_ticks / 299792.458)
+    ax2.set_xticks(v_ticks)
+    ax2.set_xticklabels([f'{f:.4f}' for f in f_ticks], fontsize=7)
+    ax2.set_xlabel('Frequency (GHz)')
+    plt.tight_layout()
+    outpath = os.path.join(plots_dir, f'{galaxy}_centre_spectrum.svg')
+    plt.savefig(outpath, facecolor='white')
+    plt.close()
+    print(f"  Saved: {outpath}")
 
 def main():
     if len(sys.argv) > 1:
@@ -265,6 +341,8 @@ def main():
 
     print("Generating integrated spectrum ...")
     plot_integrated_spectrum(data, vel_kms, galaxy, plots_dir)
+    print("Generating centre spectrum ...")
+    plot_centre_spectrum(data, vel_kms, header, galaxy, plots_dir)
 
     print("Generating PV diagram ...")
     plot_pv_diagram(data, vel_kms, header, galaxy, plots_dir)
@@ -273,7 +351,7 @@ def main():
 
     # Open all plots
     for f in sorted(os.listdir(plots_dir)):
-        if f.endswith('.png'):
+        if f.endswith('.png') or f.endswith('.svg'):
             subprocess.Popen(['xdg-open', os.path.join(plots_dir, f)])
 
 
