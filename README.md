@@ -97,13 +97,14 @@ Parsers for the three major Italian radio telescopes are planned:
 
 ### Collaborators and acknowledgements
 
-- **Ted Cline** (BAA/SARA) — author of the ezRA suite; ongoing collaboration on parser development and GBT data
-- **Eskil Varenius** (Onsala Space Observatory) — SALSA support and observing methodology
+- **Ted Cline, N0RQV** (Little Thompson Observatory, Berthoud, CO-USA) — author of the ezRA suite; ongoing collaboration on parser development and GBT data
+- **Dr. Eskil Varenius** (Onsala Space Observatory) — SALSA support and observing methodology
 - **Dr. Uwe Bach** (MPIfR, Effelsberg) — provided real Effelsberg MBFITS HI data of Holmberg 1 for parser development
 - **Dr. Andrea Melis** (INAF/SRT) — Sardinia Radio Telescope data and SARDARA backend documentation
 - **Dr. Chuan-Peng Zhang** (FAST/FEASTS team) — provided FAST/FEASTS HI data of NGC 628 for parser development and validation
 - **Dr. Mario Sandri** (Unione Astrofili Italiani; Associazione Italiana di Fisica; Phoenix APS) — astrophysicist; one of the inspirations behind this project, first encountered at ICARA 2025 (Italian Congress of Amateur Radio Astronomy, Pordenone, October 2025)
-- **Phoenix APS** (Cles, Trento) — amateur astronomy, astrophotography, radio astronomy and radio amateur club; FRO/HALO home community
+- **Dr. Andrew Thornett** (BAA, SARA) Lichfield Radio Observatory (LRO), Lichfield, UK
+- **Phoenix APS** (Cles, TN - Italy) — Amateur astronomy, astrophotography, radio astronomy and radio amateur club
 - **Claude AI** (Anthropic) — developed in collaboration with Claude AI; all parsers, format specification, viewers, and documentation were written jointly
 
 ---

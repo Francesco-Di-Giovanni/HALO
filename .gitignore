@@ -1,0 +1,20 @@
+# Data files
+*.fits
+*.FITS
+*.fro
+*.hdf5
+*.h5
+*.mbfits
+*.sdfits
+
+# Directories with raw data
+Surveys/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Temporary files
+*.tmp
+*.log
