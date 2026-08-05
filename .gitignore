@@ -8,7 +8,6 @@
 *.sdfits
 
 # Directories with raw data
-Surveys/
 
 # Python cache
 __pycache__/
