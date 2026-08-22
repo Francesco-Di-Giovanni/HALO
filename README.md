@@ -1,13 +1,12 @@
-# FRO / HALO — Francesco Radio Observatory
-## High-resolution Astrophysical Line Observatory
+# H.A.L.O. — Hydrogen Atomic Line Observatory
 
-**Bolzano, Italy — 46.4946°N, 11.3353°E, 334 m a.s.l.**
+**Bolzano/Bozen, Italy — 46.4946°N, 11.3353°E, 334 m a.s.l.**
 
 ---
 
-### What is FRO/HALO?
+### What is HALO?
 
-FRO/HALO is an amateur radio astronomy project based in Bolzano, Italy, with an unusual ambition: to build a **telescope-agnostic, format-agnostic spectral data pipeline** that can ingest observations from any radio telescope — from a 1.2-metre 3D-printed dish in a back garden to the 100-metre Effelsberg radio telescope — and archive them in a single, unified HDF5 format for scientific analysis.
+HALO is an amateur radio astronomy project based in Bolzano/Bozen, Italy, with an unusual ambition: to build a **telescope-agnostic, format-agnostic spectral data pipeline** that can ingest observations from any radio telescope — from a 1.2-metre 3D-printed dish in a backyard to the 500-metre FAST — the largest single-dish radio telescope ever built — and the 27-antenna VLA — and archive them in a single, unified HDF5 format for scientific analysis.
 
 The project started in January 2026 with a simple 3D-printed parabolic antenna and an Airspy R2 SDR receiver, targeting the HI 21-cm line. It has since grown far beyond its origins.
 
@@ -19,14 +18,14 @@ The journey so far:
 
 - **January 2026** — Project begins. A 1.2-metre parabolic dish, 3D-printed and hand-assembled, connected to an Airspy R2 SDR and a Nooelec SawBird H1 LNA. First HI spectra acquired with the ezRA suite (Ted Cline, BAA/SARA).
 - **Early 2026** — First contact with **SALSA** (Onsala Space Observatory, Sweden). Remote observations of the Galactic plane at 1.4 GHz. A bug in the SALSA slewing/integration system, discovered during these sessions, was reported and fixed by the Onsala team within hours (v1.1.8). The local SDR receiver configuration (8192 channels @ 2.5 MSps, Airspy R2) was validated during these sessions, achieving a spectral velocity resolution of **64 m/s per channel** at 1.4 GHz — a figure comparable to many professional survey instruments, obtained with consumer-grade hardware and long integration times.
-- **Mid 2026** — The FRO format (HDF5 v17) is defined. Parsers written for SALSA, **GBT** (Green Bank Telescope, 100m), **FAST/FEASTS** (Five-hundred-metre Aperture Spherical Telescope — at 500 metres in diameter, the largest single-dish radio telescope ever built), **HI4PI**, **LAB**, **EBHIS**, **Parkes/GASS**, **ATCA**, **VLASS** (VLA Sky Survey), and **JCMT/COHRS** (12CO J=3-2 at 345.796 GHz — the first molecular line integrated into the pipeline, demonstrating that FRO is not limited to the HI line).
+- **Mid 2026** — The FRO format (HDF5 v17) is defined. Parsers written for SALSA, **GBT** (Green Bank Telescope, 100m), **FAST/FEASTS** (Five-hundred-metre Aperture Spherical Telescope — at 500 metres in diameter, the largest single-dish radio telescope ever built), **HI4PI**, **LAB**, **EBHIS**, **Parkes/GASS**, **ATCA**, **VLASS** (VLA Sky Survey), and **JCMT/COHRS** (12CO J=3-2 at 345.796 GHz — the first molecular line integrated into the pipeline, demonstrating that HALO is not limited to the HI line).
 - **August 2026** — First contact with **Effelsberg** (Max Planck Institute for Radio Astronomy, Bonn). Real MBFITS HI data of **Holmberg 1** provided by Dr. Uwe Bach (MPIfR) for parser development and validation.
 
 ---
 
 ### Philosophy
 
-FRO/HALO is built on a few core principles:
+HALO is built on a few core principles:
 
 - **No hardcoded assumptions.** Every parameter — frequency axis, bandwidth, number of channels, coordinates, epoch — is read dynamically from the source file. Nothing is assumed, everything is verified.
 - **Honest metadata.** If a quantity is not measured or not defined (e.g. the epoch of a mosaic product), it is explicitly flagged as unknown rather than filled with a plausible-looking value.
@@ -120,7 +119,7 @@ This repository is a **work in progress**. Parsers are being actively developed 
 ### Contact
 
 Francesco Di Giovanni
-FRO/HALO Project — Bolzano, Italy
+HALO Project — Bolzano/Bozen, Italy
 
 If you notice any errors or have suggestions for additions, please feel free to open an issue or contact us directly.
 
