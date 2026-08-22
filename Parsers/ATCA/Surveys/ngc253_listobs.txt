@@ -1,0 +1,41 @@
+================================================================================
+           MeasurementSet Name:  /home/franz/FRO/Parsers/ATCA/Surveys/ngc253.ms      MS Version 2
+================================================================================
+   Observer: JMH     Project: C1025  
+Observation: ATCA
+Data records: 2550       Total elapsed time = 2720 seconds
+   Observed from   09-Feb-2002/23:03:10.0   to   09-Feb-2002/23:48:30.0 (UTC)
+
+   ObservationID = 0         ArrayID = 0
+  Date        Timerange (UTC)          Scan  FldId FieldName             nRows     SpwIds   Average Interval(s)    ScanIntent
+  09-Feb-2002/23:03:10.0 - 23:06:20.0     0      0 1934-638                   210  [0,1]  [27.1, 27.1] 
+              23:07:50.0 - 23:33:20.0     1      0 1934-638                  1530  [0,1]  [30, 30] 
+              23:34:50.0 - 23:41:40.0     2      1 0023-263                   420  [0,1]  [29.3, 29.3] 
+              23:42:10.0 - 23:48:30.0     3      2 NGC253                     390  [0,1]  [29.2, 29.2] 
+           (nRows = Total number of rows per scan) 
+Fields: 3
+  ID   Code Name                RA               Decl           Epoch   SrcId      nRows
+  0         1934-638            19:39:25.025995 -63.42.45.63000 J2000   0           1740
+  1         0023-263            00:25:49.166995 -26.02.12.67004 J2000   1            420
+  2         NGC253              00:47:35.379996 -25.17.38.17001 J2000   2            390
+Spectral Windows:  (2 unique spectral windows and 2 unique polarization setups)
+  SpwID  Name   #Chans   Frame   Ch0(MHz)  ChanWid(kHz)  TotBW(kHz) CtrFreq(MHz)  Corrs  
+  0               513   TOPO    1423.000       -15.625      8000.0   1419.0000   XX  YY
+  1                33   TOPO    2432.000      4000.000    128000.0   2496.0000   XX  XY  YX  YY
+Sources: 6
+  ID   Name                SpwId RestFreq(MHz)  SysVel(km/s) 
+  0    1934-638            0     1420.4         0            
+  0    1934-638            1     2496           0            
+  1    0023-263            0     1420.4         0            
+  1    0023-263            1     2496           0            
+  2    NGC253              0     1420.4         0            
+  2    NGC253              1     2496           0            
+Antennas: 6:
+  ID   Name  Station   Diam.    Long.         Lat.                Offset from array center (m)                ITRF Geocentric coordinates (m)        
+                                                                     East         North     Elevation               x               y               z
+  0    CA01  W100      22.0 m   +149.33.55.5  -30.08.43.7       1469.3793        0.7499        1.2754 -4751661.602000  2791640.120000 -3200483.739000
+  1    CA02  W110      22.0 m   +149.33.49.8  -30.08.43.7       1316.3197        0.6556        1.1289 -4751583.917000  2791772.000000 -3200483.747000
+  2    CA03  W147      22.0 m   +149.33.28.6  -30.08.43.7        750.0040        0.3498        0.6162 -4751296.494000  2792259.957000 -3200483.754000
+  3    CA04  W168      22.0 m   +149.33.16.5  -30.08.43.7        428.5703        0.2080        0.3363 -4751133.356000  2792536.915000 -3200483.736000
+  4    CA05  W196      22.0 m   +149.33.00.5  -30.08.43.7         -0.0050        0.0144       -0.0090 -4750915.834000  2792906.186000 -3200483.730000
+  5    CA06  W392      22.0 m   +149.31.08.2  -30.08.43.8      -2999.9981       -0.8834       -1.6147 -4749393.196000  2795491.052000 -3200483.700000

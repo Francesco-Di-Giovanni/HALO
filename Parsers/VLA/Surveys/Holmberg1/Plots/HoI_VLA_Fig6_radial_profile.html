@@ -1,0 +1,37 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>HoI VLA — Radial HI Profile</title>
+<script src="plotly-2.27.0.min.js"></script>
+</head><body style="background:#fff;margin:0;padding:10px">
+<div id="infobox" style="position:fixed;top:10px;left:10px;background:rgba(255,255,255,0.85);border:1px solid #aaa;padding:6px 10px;font-size:13px;font-family:monospace;border-radius:4px;z-index:999;">Move mouse over plot</div>
+<div id="plot" style="width:100%;height:90vh"></div>
+<script>
+var rad = [1.5, 4.5, 7.5, 10.5, 13.5, 16.5, 19.5, 22.5, 25.5, 28.5, 31.5, 34.5, 37.5, 40.5, 43.5, 46.5, 49.5, 52.5, 55.5, 58.5, 61.5, 64.5, 67.5, 70.5, 73.5, 76.5, 79.5, 82.5, 85.5, 88.5, 91.5, 94.5, 97.5, 100.5, 103.5, 106.5, 109.5, 112.5, 115.5, 118.5, 121.5, 124.5, 127.5, 130.5, 133.5, 136.5, 139.5, 142.5, 145.5, 148.5, 151.5, 154.5, 157.5, 160.5, 163.5, 166.5, 169.5, 172.5, 175.5, 178.5, 181.5, 184.5, 187.5, 190.5, 193.5, 196.5, 199.5, 202.5, 205.5, 208.5];
+var prof = [0.053304941943462934, 0.06992035161513886, 0.0947423385426724, 0.14428906271658093, 0.20494904843333128, 0.2635461614408034, 0.3443570538489746, 0.4633834557226792, 0.5652215413312608, 0.6720382502545447, 0.7535830117134477, 0.8315564910265518, 0.9358457928086479, 1.0190388730966673, 1.0700444328686987, 1.1454811280383659, 1.1908144826618563, 1.1943181826059017, 1.1833361539041771, 1.172237534041956, 1.1508835466643623, 1.119262261513113, 1.0758510793747897, 1.0406832086161957, 1.0119107245338292, 1.000737585747709, 0.9904260014092133, 0.9501975320005912, 0.865545661304821, 0.7838320686150593, 0.7172358755948753, 0.6605465871293696, 0.5669207219243847, 0.4942398260374367, 0.42305333057160055, 0.37089705445728205, 0.3284031577932046, 0.3013946460002264, 0.26971190194266853, 0.26150290135309706, 0.2866532189304715, 0.29875526841410793, 0.3109773887169071, 0.30184293449329935, 0.3165917840817021, 0.32980820555071466, 0.3425777507257883, 0.369827172393421, 0.36179475318355536, 0.35572720006307373, 0.34046684065077054, 0.3072259212592129, 0.2811637297546739, 0.2699151117492437, 0.22897601243883772, 0.22427683508875645, 0.21153448322020565, 0.18565979786787265, 0.18098948021929223, 0.17840687303835756, 0.1445532117401832, 0.13468202452600014, 0.1288155855085789, 0.12333148528467637, 0.12407667452366557, 0.12311527759727256, 0.11427167425849126, 0.10369944315024546, 0.10670898637334815, 0.11555792782485567];
+var traces = [{
+  x: rad, y: prof, mode: 'lines+markers',
+  line: {color:'steelblue', width:2},
+  marker: {color:'steelblue', size:6},
+  name: 'N<sub>HI</sub>'
+}];
+var layout = {
+  title: 'Holmberg I — Azimuthally-averaged HI profile<br>(origin: morphological center)',
+  xaxis: {title: 'Radius [\'\']', range:[0,210]},
+  yaxis: {title: 'Column density [10²¹ cm⁻²]', rangemode:'tozero'},
+  shapes: [
+    {type:'line', x0:0, x1:210, y0:1, y1:1, line:{color:'black',dash:'dash',width:1}},
+    {type:'line', x0:40, x1:40, y0:0, y1:1.5, line:{color:'gray',dash:'dot',width:1}},
+    {type:'line', x0:70, x1:70, y0:0, y1:1.5, line:{color:'gray',dash:'dot',width:1}}
+  ],
+  annotations: [
+    {x:105, y:1.02, text:'N<sub>HI</sub>=10²¹ cm⁻² (SF threshold)',
+      showarrow:false, font:{size:10}}
+  ],
+  hovermode:'x unified', hoverlabel:{bgcolor:'rgba(0,0,0,0)', bordercolor:'rgba(0,0,0,0)', font:{color:'rgba(0,0,0,0)'}}, plot_bgcolor:'white', paper_bgcolor:'white'
+};
+Plotly.newPlot('plot', traces, layout, {responsive:true});
+document.getElementById('plot').on('plotly_hover', function(data) {
+  var pt = data.points[0];
+  document.getElementById('infobox').innerHTML = '<b>R:</b> ' + pt.x.toFixed(1) + '"<br><b>N<sub>HI</sub>:</b> ' + pt.y.toFixed(3) + ' ×10²¹ cm⁻²';
+});
+</script>
+</body></html>
