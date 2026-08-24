@@ -139,6 +139,21 @@ def parse_mbfits(mbfits_dir, output_dir):
 
         out_name = obs_name + '_bb' + str(bb) + '.fro'
         out_path = os.path.join(output_dir, out_name)
+        skip_bb = False
+        overwrite_fro = False
+        if os.path.exists(out_path):
+            while True:
+                confirm = input(f"File '{out_path}' already exists. Overwrite? (y/N): ").strip().lower()
+                if confirm in ("y", "yes"):
+                    overwrite_fro = True
+                    break
+                if confirm in ("n", "no", ""):
+                    print("File not overwritten. Skipping baseband", bb)
+                    skip_bb = True
+                    break
+                print(f"'{confirm}' is not a valid answer. Please type y or n.")
+        if skip_bb:
+            continue
 
         pol_labels = ['pol' + str(i + 1) for i in range(n_feeds)]
 
@@ -165,6 +180,7 @@ def parse_mbfits(mbfits_dir, output_dir):
 
         create_fro_v17_structure(
             out_path,
+            overwrite=overwrite_fro,
             frequency_axis_hz   = freq_hz,
             facility            = meta['telescop'] if meta['telescop'] else OBS_NAME,
             instrument          = febe,
