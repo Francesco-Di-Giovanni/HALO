@@ -58,7 +58,7 @@ HALO is built on a few core principles:
 
 | Viewer | Description | Link |
 |---|---|---|
-| FASHI DR2 — 3D HI Universe | 156,411 extragalactic HI sources from FAST, rendered in 3D. Colour-coded by HI mass. Rotate, zoom, and hover for source details. | [Open viewer](https://htmlpreview.github.io/?https://github.com/Francesco-Di-Giovanni/FRO-HALO/blob/main/FASHI_DR2_3D_universe.html) |
+| FASHI DR2 — 3D HI Universe | 156,411 extragalactic HI sources from FAST, rendered in 3D. Colour-coded by HI mass. Rotate, zoom, and hover for source details. | [Open viewer](https://htmlpreview.github.io/?https://github.com/Francesco-Di-Giovanni/HALO/blob/main/FASHI_DR2_3D_universe.html) |
 
 ---
 
