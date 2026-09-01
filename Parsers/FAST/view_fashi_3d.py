@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # Copyright (c) 2026 Francesco Di Giovanni — HALO Project
 # Released under MIT License
-# https://github.com/Francesco-Di-Giovanni/FRO-HALO
+# https://github.com/Francesco-Di-Giovanni/HALO
 #
 # view_fashi_3d.py — Interactive 3D viewer for the FASHI DR2 extragalactic HI catalog
 # Converts (RA, Dec, distance) to Cartesian (X, Y, Z) in Mpc and renders with Plotly.
