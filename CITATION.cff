@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "HALO — Hydrogen Atomic Line Observatory"
+authors:
+  - family-names: Di Giovanni
+    given-names: Francesco
+    city: Bolzano
+    country: IT
+repository-code: "https://github.com/Francesco-Di-Giovanni/FRO-HALO"
+url: "https://github.com/Francesco-Di-Giovanni/FRO-HALO"
+license: MIT
+version: "17.0"
+date-released: "2026-09-01"
+abstract: "A telescope-agnostic, format-agnostic HDF5 spectral data pipeline for radio astronomy,
+  integrating observations from professional radio telescopes (FAST, Effelsberg, SALSA, SRT,
+  Parkes, GBT, MeerKAT and others) into a unified FRO HDF5 v17 format for scientific analysis."
+keywords:
+  - radio astronomy
+  - HI 21cm
+  - CO 345 GHz
+  - spectral line astronomy
+  - HDF5
+  - FAST
+  - Effelsberg
+  - SALSA
+  - data pipeline
