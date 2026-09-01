@@ -54,6 +54,14 @@ HALO is built on a few core principles:
 
 ---
 
+### Interactive viewers
+
+| Viewer | Description | Link |
+|---|---|---|
+| FASHI DR2 — 3D HI Universe | 156,411 extragalactic HI sources from FAST, rendered in 3D. Colour-coded by HI mass. Rotate, zoom, and hover for source details. | [Open viewer](https://htmlpreview.github.io/?https://github.com/Francesco-Di-Giovanni/FRO-HALO/blob/main/FASHI_DR2_3D_universe.html) |
+
+---
+
 ### The FRO HDF5 format (v17)
 
 The core of the pipeline is `fro_format_v17.py`, which defines a common HDF5 structure for storing spectral observations from any telescope. Key groups:
@@ -120,6 +128,7 @@ This repository is a **work in progress**. Parsers are being actively developed 
 
 Francesco Di Giovanni
 HALO Project — Bolzano/Bozen, Italy
+halo.observatory.bz@gmail.com
 
 If you notice any errors or have suggestions for additions, please feel free to open an issue or contact us directly.
 
