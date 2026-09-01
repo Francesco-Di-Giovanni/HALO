@@ -128,7 +128,7 @@ This repository is a **work in progress**. Parsers are being actively developed 
 
 Francesco Di Giovanni
 HALO Project — Bolzano/Bozen, Italy
-halo.observatory.bz@gmail.com
+halo.observatory.bz [at] gmail [dot] com
 
 If you notice any errors or have suggestions for additions, please feel free to open an issue or contact us directly.
 
