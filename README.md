@@ -1,4 +1,6 @@
-# H.A.L.O. — Hydrogen Atomic Line Observatory
+# HALO — Hub for Any Line Observation
+
+*English · [Italiano](README_IT.md)*
 
 **Bolzano/Bozen, Italy — 46.4946°N, 11.3353°E, 334 m a.s.l.**
 
@@ -6,128 +8,137 @@
 
 ### What is HALO?
 
-HALO is an amateur radio astronomy project based in Bolzano/Bozen, Italy, with an unusual ambition: to build a **telescope-agnostic, format-agnostic spectral data pipeline** that can ingest observations from any radio telescope — from a 1.2-metre 3D-printed dish in a backyard to the 500-metre FAST — the largest single-dish radio telescope ever built — and the 27-antenna VLA — and archive them in a single, unified HDF5 format for scientific analysis.
+HALO is an amateur radio astronomy project based in Bolzano, Italy, with an unusual ambition: to build a **telescope-agnostic, format-agnostic spectral data pipeline** that can ingest observations from any radio telescope — from a home-built receiver to the 500-metre FAST — and archive them in a single, unified HDF5 format for scientific analysis.
 
-The project started in January 2026 with a simple 3D-printed parabolic antenna and an Airspy R2 SDR receiver, targeting the HI 21-cm line. It has since grown far beyond its origins.
+The project was born as FRO (Francesco Radio Observatory), a home-built receiver for the HI 21-cm line. It has since grown well beyond hydrogen: today HALO handles any spectral line at any frequency, and the name reflects it.
+
+![HALO — a hub for radio astronomy data: telescopes and surveys, the HDF5 v17 format, and the modules](images/HALO_hub_EN.svg)
 
 ---
 
-### From a 3D-printed dish to Effelsberg
+### From a home receiver to the Great Attractor
 
-The journey so far:
-
-- **January 2026** — Project begins. A 1.2-metre parabolic dish, 3D-printed and hand-assembled, connected to an Airspy R2 SDR and a Nooelec SawBird H1 LNA. First HI spectra acquired with the ezRA suite (Ted Cline, BAA/SARA).
-- **Early 2026** — First contact with **SALSA** (Onsala Space Observatory, Sweden). Remote observations of the Galactic plane at 1.4 GHz. A bug in the SALSA slewing/integration system, discovered during these sessions, was reported and fixed by the Onsala team within hours (v1.1.8). The local SDR receiver configuration (8192 channels @ 2.5 MSps, Airspy R2) was validated during these sessions, achieving a spectral velocity resolution of **64 m/s per channel** at 1.4 GHz — a figure comparable to many professional survey instruments, obtained with consumer-grade hardware and long integration times.
-- **Mid 2026** — The FRO format (HDF5 v17) is defined. Parsers written for SALSA, **GBT** (Green Bank Telescope, 100m), **FAST/FEASTS** (Five-hundred-metre Aperture Spherical Telescope — at 500 metres in diameter, the largest single-dish radio telescope ever built), **HI4PI**, **LAB**, **EBHIS**, **Parkes/GASS**, **ATCA**, **VLASS** (VLA Sky Survey), and **JCMT/COHRS** (12CO J=3-2 at 345.796 GHz — the first molecular line integrated into the pipeline, demonstrating that HALO is not limited to the HI line).
-- **August 2026** — First contact with **Effelsberg** (Max Planck Institute for Radio Astronomy, Bonn). Real MBFITS HI data of **Holmberg 1** provided by Dr. Uwe Bach (MPIfR) for parser development and validation.
+- **January 2026** — Project begins. A parabolic dish is 3D-printed in PETG: 1.2 m in diameter at f/D 0.6, plus an additional outer section that brings it to 1.8 m at f/D 0.4. Its feed, a cantenna, gave excellent results on the VNA. The dish was completed but never assembled with the feed: it did not fit on the balcony, and in the meantime the observations had moved to the Onsala radio telescopes. The receiver chain — Airspy R2 SDR and Nooelec SawBird H1 LNA — was tested with the ezRA suite using a 5-element Yagi antenna and a dummy load.
+- **June–July 2026** — Remote observations of the Galactic plane with **SALSA** (Onsala Space Observatory, Sweden). An azimuth wrap-around bug in the SALSA slewing/integration system, found during these sessions, was reported and fixed by the Onsala team the same day (v1.1.8). The local receiver configuration (8192 channels @ 2.5 MSps, Airspy R2) was validated, reaching a velocity resolution of about **64 m/s per channel** at 1420 MHz with consumer-grade hardware.
+- **Summer 2026** — The HDF5 v17 format is defined. Parsers written for **GBT** (Green Bank, 100 m), **FAST/FEASTS** (500 m, the largest single-dish radio telescope ever built), **HI4PI**, **LAB**, **EBHIS**, **Parkes/GASS** and **JCMT/COHRS** — ¹²CO(3-2) at 345.796 GHz, the first molecular line in the pipeline.
+- **August 2026** — First contact with **Effelsberg** (MPIfR, Bonn): real MBFITS HI data of **Holmberg I** provided for parser development and validation.
+- **September 2026** — All-sky HI maps and longitude-velocity diagrams from the full HI4PI dataset; the **FASHI DR2** catalogue (156,411 HI sources) and the **ALFALFA α.100** catalogue integrated.
+- **September–October 2026** — **Cosmicflows-4** and the **CF4++** reconstructed velocity grids (Courtois et al. 2025): toward 3D maps of the basins of attraction (Laniakea, the Great Attractor). While analysing the public CF4++ grids, HALO found an x/y axis swap in the radial velocity grids (`vr_mean_CF4pp` and `vr_std_CF4pp`). The error was confirmed by Dr. Amber Hollinger, and a corrected file is being released by the CF4++ team.
 
 ---
 
 ### Philosophy
 
-HALO is built on a few core principles:
-
 - **No hardcoded assumptions.** Every parameter — frequency axis, bandwidth, number of channels, coordinates, epoch — is read dynamically from the source file. Nothing is assumed, everything is verified.
-- **Honest metadata.** If a quantity is not measured or not defined (e.g. the epoch of a mosaic product), it is explicitly flagged as unknown rather than filled with a plausible-looking value.
-- **Raw data only.** The `.fro` archive format stores only the raw, uncalibrated spectra as delivered by the telescope. Smoothing, baseline subtraction, and calibration are reserved for the analysis stage.
-- **No format lock-in.** The FRO HDF5 format is the hub, not the destination. Export converters to ezRA, SDFITS, and other formats are part of the roadmap.
-- **Open to any spectral line.** Despite the "HALO" name, the pipeline handles any spectral line at any frequency — from HI at 1.4 GHz to 12CO(3-2) at 345.796 GHz and beyond.
+- **Unknown values declared.** If a quantity is not measured or not defined (e.g. the epoch of a mosaic product), it is explicitly flagged as unknown rather than filled with a plausible-looking value.
+- **Original source data, traced provenance.** `.fro` files store the data exactly as provided by the observatory or survey team. HALO applies no smoothing, baseline subtraction or calibration of its own; any processing done upstream is recorded in the provenance metadata.
+- **Nothing from the source is thrown away.** Quality flags, environmental data and calibration parameters are preserved on import.
+- **No format lock-in.** The HDF5 format is the hub, not the destination. Export converters to ezRA, SDFITS and other formats are part of the roadmap.
+- **Any line, any frequency.** From HI at 1.4 GHz to ¹²CO(3-2) at 345.796 GHz and beyond.
 
 ---
 
-### Telescopes and surveys currently supported
+### Telescopes, surveys and catalogues
 
-| Telescope / Survey | Frequency | Line | Parser |
+| Telescope / Survey | Frequency | Line / Data | Tool |
 |---|---|---|---|
-| Local (Airspy R2 + 1.2m dish) | 1.4 GHz | HI | ezRA / ezColAirspy |
-| SALSA (Onsala, 2×2.3m) | 1.4 GHz | HI | `salsa_fits_to_fro.py` |
-| FAST/FEASTS (500m) | 1.4 GHz | HI | `feasts_cube_to_fro.py` |
-| GBT (100m, Green Bank) | 1.4 GHz | HI, H₂O | `gbt_sdfits_to_fro.py` |
-| Effelsberg (100m, Bonn) | 1.4 GHz | HI | `mbfits_to_fro.py` *(in dev)* |
-| Parkes/GASS (64m) | 1.4 GHz | HI | `parkes_gass_to_fro.py` |
-| HI4PI (all-sky survey) | 1.4 GHz | HI | `hi4pi_to_fro.py` |
+| Local (Airspy R2 + Yagi) | 1.4 GHz | HI | ezRA / ezColAirspy |
+| SALSA (Onsala, 2.3 m) | 1.4 GHz | HI | `salsa_fits_to_fro.py` |
+| GBT (Green Bank, 100 m) | 1.4 GHz | HI, H₂O | `gbt_sdfits_to_fro.py` |
+| Effelsberg (Bonn, 100 m) | 1.4 GHz | HI | `mbfits_to_fro.py` |
+| FAST/FEASTS (500 m) | 1.4 GHz | HI | `feasts_cube_to_fro.py` |
+| FAST/FASHI DR2 | 1.4 GHz | HI source catalogue | `plot_fashi.py` |
+| Arecibo/ALFALFA α.100 | 1.4 GHz | HI source catalogue | `plot_alfalfa.py` |
+| Parkes/GASS (64 m) | 1.4 GHz | HI | `parkes_gass_to_fro.py` |
+| HI4PI (all-sky) | 1.4 GHz | HI | `hi4pi_to_fro.py` |
 | LAB Survey | 1.4 GHz | HI | `lab_to_fro.py` |
 | EBHIS | 1.4 GHz | HI | `ebhis_to_fro.py` |
-| ATCA (archival) | various | various | *(in dev)* |
-| VLA/VLASS | 3 GHz | continuum | `view_vlass.py` |
-| JCMT/COHRS (15m, Maunakea) | 345.796 GHz | ¹²CO(3-2) | `cohrs_to_fro.py` |
+| ATCA (archival) | various | various | calibrated externally with CASA; final products imported |
+| VLA/VLASS | 3 GHz | continuum | `view_vlass.py` (viewer) |
+| JCMT/COHRS (15 m, Maunakea) | 345.796 GHz | ¹²CO(3-2) | `cohrs_to_fro.py` |
+| Cosmicflows-4 / CF4++ | — | peculiar velocities, reconstructed velocity field | `cf4_catalog.py`, `cf4_grid.py` |
 
 ---
 
-### Interactive viewers
+### The HDF5 v17 format (`.fro` files)
 
-| Viewer | Description | Link |
-|---|---|---|
-| FASHI DR2 — 3D HI Universe | 156,411 extragalactic HI sources from FAST, rendered in 3D. Colour-coded by HI mass. Rotate, zoom, and hover for source details. | [Open viewer](https://htmlpreview.github.io/?https://github.com/Francesco-Di-Giovanni/HALO/blob/main/FASHI_DR2_3D_universe.html) |
+The format is defined by `fro_format_v17.py` and provides a common HDF5 structure for spectral observations from any telescope. Main groups:
 
----
-
-### The FRO HDF5 format (v17)
-
-The core of the pipeline is `fro_format_v17.py`, which defines a common HDF5 structure for storing spectral observations from any telescope. Key groups:
-
-- **Spectra** — raw spectra, frequency axis in Hz, optional cross-polarisation terms
+- **Spectra** — spectra as provided by the source, frequency axis in Hz, optional cross-polarisation terms
 - **Pointing** — Az/El, RA/Dec, GLon/GLat per integration
 - **Time** — UTC timestamps, Unix time, integration duration
 - **Source** — provenance metadata (facility, instrument, survey, dataset, provider)
-- **Observatory** — physical location of the telescope
+- **Observatory** — physical location of the telescope that acquired the data
 - **Quality** — tracking and calibration flags
 - **Environment** — temperature, humidity, pressure per integration
 - **Calibration** — per-feed polarisation and calibration parameters
 - **Observation** — receiver, centre frequency, calibration notes
 - **Notes** — free-text provenance and processing notes
 
-The format uses the `UNKNOWN_EPOCH` sentinel for mosaic products where a per-pixel epoch is undefined (e.g. HI4PI, COHRS), ensuring metadata honesty at all times.
+The `UNKNOWN_EPOCH` sentinel is used for mosaic products where a per-pixel epoch is undefined (e.g. HI4PI, COHRS).
 
 ---
 
 ### Software and hardware
 
 **Local receiver:**
+
 - Airspy R2 SDR (2.5 / 10 MSps)
 - Nooelec SawBird H1 LNA
-- 1.2-metre parabolic dish (3D-printed)
+- 5-element Yagi antenna
+- 3D-printed parabolic dish, 1.2 m (f/D 0.6) or 1.8 m (f/D 0.4), with cantenna feed — built, not assembled
 - Fujitsu ESPRIMO Q958 mini-PC, Ubuntu, Python 3.14
 
-**Analysis:**
-- [ezRA suite](https://github.com/tedcline/ezRA) — primary analysis and visualisation tool, developed by Ted Cline (N0RQV)
-- [DSPIRA](https://github.com/WVURAIL/gr-radio_astro) (Digital Signal Processing in Radio Astronomy) — GNU Radio flowgraph framework developed by West Virginia University (WVURAIL); used as the basis for the local SDR spectrometer, inspired by Andrew Sutkowski's GNU Radio interface for integration with ezRA. Thanks to Dr. Andrew Thornett (BAA/SARA) for his Monday online meetings.
-- Custom viewers for each telescope (spectrum plots, l-v diagrams, moment maps, peak temperature maps)
+**HALO software:**
 
-**Roadmap — Italian radio telescopes:**
-Parsers for the three major Italian radio telescopes are planned:
-- **SRT** (Sardinia Radio Telescope, 64m, INAF)
-- **Noto** (32m, INAF, Sicily)
-- **Medicina** (32m, INAF, Bologna)
+- **HALO Launcher** — single entry point to all parsers, modules and datasets
+- Reusable modules: format library, spectrum viewer, all-sky grid builder, all-sky map viewer, longitude-velocity diagrams
+- Viewers for each telescope (spectra, l-v diagrams, moment maps, peak temperature maps)
+
+**External tools:**
+
+- [ezRA suite](https://github.com/tedcline/ezRA) — analysis and visualisation, developed by Ted Cline (SARA); with contributions by Andrew Sutkowski (SARA) and Andrew Thornett (BAA/SARA)
+- [DSPIRA](https://github.com/WVURAIL/gr-radio_astro) (Digital Signal Processing in Radio Astronomy) — GNU Radio framework by West Virginia University (WVURAIL); basis of the local SDR spectrometer
+
+---
+
+### Roadmap
+
+- Parsers for the Italian radio telescopes: **SRT** (Sardinia Radio Telescope, 64 m, INAF), **Noto** (32 m, INAF) and **Medicina** (32 m, INAF)
+- 3D visualisation of the cosmic basins of attraction from Cosmicflows-4 / CF4++
+- Export to SDFITS
+- Completion of the SALSA Galactic plane survey
 
 ---
 
 ### Collaborators and acknowledgements
 
-- **Ted Cline, N0RQV** (Little Thompson Observatory, Berthoud, CO-USA) — author of the ezRA suite; ongoing collaboration on parser development and GBT data
+- **Ted Cline** (SARA) — author of the ezRA suite; collaboration on parser development
+- **Andrew Thornett** (BAA/SARA) — contributor to ezRA; organiser of the monthly S.A.R.A. videoconferences
+- **Andrew Sutkowski** (SARA) — contributor to ezRA; analogue gauge designs and graphics for the HALO interface (work in progress)
 - **Dr. Eskil Varenius** (Onsala Space Observatory) — SALSA support and observing methodology
-- **Dr. Uwe Bach** (MPIfR, Effelsberg) — provided real Effelsberg MBFITS HI data of Holmberg 1 for parser development
-- **Dr. Chuan-Peng Zhang** (NAOC) — provided FAST M33 HI coordinate data for parser development and validation
-- **Dr. Jing Wang** (KIAA, Peking University; FEASTS team lead) — provided permission to use FEASTS HI data of NGC 628 in the HALO pipeline and repository
-- **Dr. Mario Sandri** (Unione Astrofili Italiani; Associazione Italiana di Fisica; Phoenix APS) — astrophysicist; one of the inspirations behind this project, first encountered at ICARA 2025 (Italian Congress of Amateur Radio Astronomy, Pordenone, October 2025)
-- **Dr. Andrew Thornett** (BAA, SARA) Lichfield Radio Observatory (LRO), Lichfield, UK
-- **Phoenix APS** (Cles, TN - Italy) — Amateur astronomy, astrophotography, radio astronomy and radio amateur club
-- **Claude AI** (Anthropic) — developed in collaboration with Claude AI; all parsers, format specification, viewers, and documentation were written jointly
+- **Dr. Uwe Bach** (MPIfR, Effelsberg) — Effelsberg MBFITS HI data of Holmberg I
+- **Dr. Jing Wang** (PKU/KIAA), FEASTS PI — FAST/FEASTS HI data of NGC 628
+- **Dr. Chuan-Peng Zhang** (NAOC) — FAST coordinate script; FASHI first author
+- **Prof. Hélène Courtois** (Université Claude Bernard Lyon 1) and **Dr. Amber Hollinger** (ANU) — CF4++ reconstructed grids; confirmation of the radial-grid axis swap
+- **Prof. Mario Sandri** (Unione Astrofili Italiani; Associazione Italiana di Fisica) — astrophysicist and mentor of the project
+- **Phoenix APS** (Cles, Trento) — amateur astronomy, astrophotography, radio astronomy and radio amateur club; HALO home community
+- **Claude AI** (Anthropic) — development and documentation partner; parsers, format specification, viewers and documentation were written jointly
 
 ---
 
 ### Status
 
-This repository is a **work in progress**. Parsers are being actively developed and validated. Documentation is being added progressively.
+Work in progress. Parsers and modules are actively developed and validated; documentation is added progressively.
 
-**Current focus:** Effelsberg/MBFITS parser validation with real Holmberg 1 HI data.
+**Current focus:** Cosmicflows-4 / CF4++ basins of attraction, and the presentation of HALO at the I.C.A.R.A. 2026 congress (La Spezia, October 2026).
 
 ---
 
 ### Contact
 
-Francesco Di Giovanni
-HALO Project — Bolzano/Bozen, Italy
+Francesco Di Giovanni  
+HALO Project — Bolzano/Bozen, Italy  
 halo.observatory.bz [at] gmail [dot] com
 
 If you notice any errors or have suggestions for additions, please feel free to open an issue or contact us directly.
