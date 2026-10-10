@@ -115,7 +115,7 @@ Il valore sentinella `UNKNOWN_EPOCH` si usa per i prodotti a mosaico in cui l'ep
 
 - **Ted Cline** (SARA) — autore della suite ezRA; collaborazione allo sviluppo dei parser
 - **Andrew Thornett** (BAA/SARA) — organizzatore delle videoconferenze mensili S.A.R.A.
-- **Andrew Sutkowski** (SARA) — indicatori analogici e grafica per l'interfaccia HALO (in corso)
+- **Andrew Sutkowski** (SARA) — la sua interfaccia ha ispirato gli indicatori analogici e la grafica dell'interfaccia HALO (in corso)
 - **Dr. Eskil Varenius** (Onsala Space Observatory) — supporto SALSA e metodologia osservativa
 - **Dr. Uwe Bach** (MPIfR, Effelsberg) — dati MBFITS HI di Holmberg I da Effelsberg
 - **Dr. Jing Wang** (PKU/KIAA), PI di FEASTS — dati HI FAST/FEASTS di NGC 628

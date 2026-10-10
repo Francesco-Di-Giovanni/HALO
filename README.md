@@ -115,7 +115,7 @@ The `UNKNOWN_EPOCH` sentinel is used for mosaic products where a per-pixel epoch
 
 - **Ted Cline** (SARA) — author of the ezRA suite; collaboration on parser development
 - **Andrew Thornett** (BAA/SARA) — organiser of the monthly S.A.R.A. videoconferences
-- **Andrew Sutkowski** (SARA) — analogue gauge designs and graphics for the HALO interface (work in progress)
+- **Andrew Sutkowski** (SARA) — his interface inspired the analogue gauges and graphics of the HALO interface (work in progress)
 - **Dr. Eskil Varenius** (Onsala Space Observatory) — SALSA support and observing methodology
 - **Dr. Uwe Bach** (MPIfR, Effelsberg) — Effelsberg MBFITS HI data of Holmberg I
 - **Dr. Jing Wang** (PKU/KIAA), FEASTS PI — FAST/FEASTS HI data of NGC 628
