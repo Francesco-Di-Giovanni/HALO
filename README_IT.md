@@ -97,7 +97,7 @@ Il valore sentinella `UNKNOWN_EPOCH` si usa per i prodotti a mosaico in cui l'ep
 
 **Strumenti esterni:**
 
-- [Suite ezRA](https://github.com/tedcline/ezRA) — analisi e visualizzazione, sviluppata da Ted Cline (SARA); con contributi di Andrew Sutkowski (SARA) e Andrew Thornett (BAA/SARA)
+- [Suite ezRA](https://github.com/tedcline/ezRA) — analisi e visualizzazione, sviluppata da Ted Cline (SARA); con contributi di Andrew Sutkowski (SARA)
 - [DSPIRA](https://github.com/WVURAIL/gr-radio_astro) (Digital Signal Processing in Radio Astronomy) — framework GNU Radio della West Virginia University (WVURAIL); base dello spettrometro SDR locale
 
 ---
@@ -114,7 +114,7 @@ Il valore sentinella `UNKNOWN_EPOCH` si usa per i prodotti a mosaico in cui l'ep
 ### Collaboratori e ringraziamenti
 
 - **Ted Cline** (SARA) — autore della suite ezRA; collaborazione allo sviluppo dei parser
-- **Andrew Thornett** (BAA/SARA) — contributi a ezRA; organizzatore delle videoconferenze mensili S.A.R.A.
+- **Andrew Thornett** (BAA/SARA) — organizzatore delle videoconferenze mensili S.A.R.A.
 - **Andrew Sutkowski** (SARA) — contributi a ezRA; indicatori analogici e grafica per l'interfaccia HALO (in corso)
 - **Dr. Eskil Varenius** (Onsala Space Observatory) — supporto SALSA e metodologia osservativa
 - **Dr. Uwe Bach** (MPIfR, Effelsberg) — dati MBFITS HI di Holmberg I da Effelsberg

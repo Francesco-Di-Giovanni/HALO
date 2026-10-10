@@ -97,7 +97,7 @@ The `UNKNOWN_EPOCH` sentinel is used for mosaic products where a per-pixel epoch
 
 **External tools:**
 
-- [ezRA suite](https://github.com/tedcline/ezRA) — analysis and visualisation, developed by Ted Cline (SARA); with contributions by Andrew Sutkowski (SARA) and Andrew Thornett (BAA/SARA)
+- [ezRA suite](https://github.com/tedcline/ezRA) — analysis and visualisation, developed by Ted Cline (SARA); with contributions by Andrew Sutkowski (SARA)
 - [DSPIRA](https://github.com/WVURAIL/gr-radio_astro) (Digital Signal Processing in Radio Astronomy) — GNU Radio framework by West Virginia University (WVURAIL); basis of the local SDR spectrometer
 
 ---
@@ -114,7 +114,7 @@ The `UNKNOWN_EPOCH` sentinel is used for mosaic products where a per-pixel epoch
 ### Collaborators and acknowledgements
 
 - **Ted Cline** (SARA) — author of the ezRA suite; collaboration on parser development
-- **Andrew Thornett** (BAA/SARA) — contributor to ezRA; organiser of the monthly S.A.R.A. videoconferences
+- **Andrew Thornett** (BAA/SARA) — organiser of the monthly S.A.R.A. videoconferences
 - **Andrew Sutkowski** (SARA) — contributor to ezRA; analogue gauge designs and graphics for the HALO interface (work in progress)
 - **Dr. Eskil Varenius** (Onsala Space Observatory) — SALSA support and observing methodology
 - **Dr. Uwe Bach** (MPIfR, Effelsberg) — Effelsberg MBFITS HI data of Holmberg I
