@@ -8,11 +8,11 @@
 
 ### What is HALO?
 
-HALO is an amateur radio astronomy project based in Bolzano, Italy, with an unusual ambition: to build a **telescope-agnostic, format-agnostic spectral data pipeline** that can ingest observations from any radio telescope — from a home-built receiver to the 500-metre FAST — and archive them in a single, unified HDF5 format for scientific analysis.
+HALO is an amateur radio astronomy project based in Bolzano, Italy, with an unusual ambition: to build a **telescope-agnostic, format-agnostic spectral data pipeline** that can ingest observations from any radio telescope — from a home-built receiver to the 500-metre FAST — and archive them in a single, unified format, HALO-HDF5, for scientific analysis.
 
 The project was born as FRO (Francesco Radio Observatory), a home-built receiver for the HI 21-cm line. It has since grown well beyond hydrogen: today HALO handles any spectral line at any frequency, and the name reflects it.
 
-![HALO — a hub for radio astronomy data: telescopes and surveys, the HDF5 v17 format, and the modules](images/HALO_hub_EN.svg)
+![HALO — a hub for radio astronomy data: telescopes and surveys, the HALO-HDF5 (v17) format, and the modules](images/HALO_hub_EN.svg)
 
 ---
 
@@ -20,7 +20,7 @@ The project was born as FRO (Francesco Radio Observatory), a home-built receiver
 
 - **January 2026** — Project begins. A parabolic dish is 3D-printed in PETG: 1.2 m in diameter at f/D 0.6, plus an additional outer section that brings it to 1.8 m at f/D 0.4. Its feed, a cantenna, gave excellent results on the VNA. The dish was completed but never assembled with the feed: it did not fit on the balcony, and in the meantime the observations had moved to the Onsala radio telescopes. The receiver chain — Airspy R2 SDR and Nooelec SawBird H1 LNA — was tested with the ezRA suite using a 5-element Yagi antenna and a dummy load.
 - **June–July 2026** — Remote observations of the Galactic plane with **SALSA** (Onsala Space Observatory, Sweden). An azimuth wrap-around bug in the SALSA slewing/integration system, found during these sessions, was reported and fixed by the Onsala team the same day (v1.1.8). The local receiver configuration (8192 channels @ 2.5 MSps, Airspy R2) was validated, reaching a velocity resolution of about **64 m/s per channel** at 1420 MHz with consumer-grade hardware. Before HALO, ezRA did not support the Airspy R2. Francesco Di Giovanni, with the help of Claude AI, wrote `ezColAirspy` by adapting Ted Cline's ezCol data collector to drive the Airspy R2 through SoapySDR. With `ezColAirspy`, the Airspy R2 SDR can be used with ezRA.
-- **Summer 2026** — The HDF5 v17 format is defined. Parsers written for **GBT** (Green Bank, 100 m), **FAST/FEASTS** (500 m, the largest single-dish radio telescope ever built), **HI4PI**, **LAB**, **EBHIS**, **Parkes/GASS** and **JCMT/COHRS** — ¹²CO(3-2) at 345.796 GHz, the first molecular line in the pipeline.
+- **Summer 2026** — The HALO-HDF5 (v17) format is defined. Parsers written for **GBT** (Green Bank, 100 m), **FAST/FEASTS** (500 m, the largest single-dish radio telescope ever built), **HI4PI**, **LAB**, **EBHIS**, **Parkes/GASS** and **JCMT/COHRS** — ¹²CO(3-2) at 345.796 GHz, the first molecular line in the pipeline.
 - **August 2026** — First contact with **Effelsberg** (MPIfR, Bonn): real MBFITS HI data of **Holmberg I** provided for parser development and validation.
 - **September 2026** — All-sky HI maps and longitude-velocity diagrams from the full HI4PI dataset; the **FASHI DR2** catalogue (156,411 HI sources) and the **ALFALFA α.100** catalogue integrated.
 - **September–October 2026** — **Cosmicflows-4** and the **CF4++** reconstructed velocity grids (Courtois et al. 2025): toward 3D maps of the basins of attraction (Laniakea, the Great Attractor). While analysing the public CF4++ grids, HALO found an x/y axis swap in the radial velocity grids (`vr_mean_CF4pp` and `vr_std_CF4pp`). The error was confirmed by Dr. Amber Hollinger, and a corrected file is being released by the CF4++ team. Explanation: [EN](docs/CF4pp_xy_swap_EN.pdf) · [IT](docs/CF4pp_xy_swap_IT.pdf); diagram: [EN](images/CF4pp_xy_swap_EN.svg) · [IT](images/CF4pp_xy_swap_IT.svg).
@@ -33,7 +33,7 @@ The project was born as FRO (Francesco Radio Observatory), a home-built receiver
 - **Unknown values declared.** If a quantity is not measured or not defined (e.g. the epoch of a mosaic product), it is explicitly flagged as unknown rather than filled with a plausible-looking value.
 - **Original source data, traced provenance.** `.fro` files store the data exactly as provided by the observatory or survey team. HALO applies no smoothing, baseline subtraction or calibration of its own; any processing done upstream is recorded in the provenance metadata.
 - **Nothing from the source is thrown away.** Quality flags, environmental data and calibration parameters are preserved on import.
-- **No format lock-in.** The HDF5 format is the hub, not the destination. Export converters to ezRA, SDFITS and other formats are part of the roadmap.
+- **No format lock-in.** The hub of HALO is the **HALO-HDF5 (v17)** format. HDF5 (Hierarchical Data Format, version 5) is a standard, open container format for scientific data, readable by any HDF5 tool (h5py, HDFView and others). A `.fro` file is an ordinary HDF5 file that follows a fixed internal structure defined by HALO's `fro_format_v17.py`: groups for spectra, pointing, time, source provenance, observatory, quality flags, environment, calibration, observation details and notes. The `.fro` extension simply marks HDF5 files that follow this structure. HALO-HDF5 is the hub, not the destination: the export module [`fro_to_ezra.py`](Moduli/fro_to_ezra/fro_to_ezra.py) converts `.fro` files into the format read by ezRA, so data imported into HALO from professional radio telescopes can be analysed with ezRA. Tested end-to-end (`fro_to_ezra.py` → ezCon): SALSA (Onsala). For reasons of time, the other observatories have not been tested in ezRA yet, although the format supports them: GBT, Effelsberg, FAST/FEASTS, Parkes/GASS, HI4PI, LAB, EBHIS, JCMT/COHRS. ezRA was designed for the HI line; other lines and frequencies (e.g. ¹²CO 3-2 at 345.796 GHz from JCMT/COHRS) are still to be verified. ezRA analyses spectra: FASHI DR2 and ALFALFA α.100 are catalogues of galaxies with already-derived values (position, velocity, flux, distance), so they cannot be exported to ezRA unless the raw data are obtained. ALFALFA spectra or FASHI data cubes could then be imported into `.fro` and exported to ezRA. The ALFALFA raw spectra have been requested from Prof. Martha Haynes (Cornell University); a reply is still awaited. Cosmicflows-4 (Tully et al. 2023), the CF4++ reconstructed grids (Courtois et al. 2025) and VLASS continuum images contain no spectra and are excluded by their nature. Converters to SDFITS and other formats are on the roadmap.
 - **Any line, any frequency.** From HI at 1.4 GHz to ¹²CO(3-2) at 345.796 GHz and beyond.
 
 ---
@@ -60,7 +60,7 @@ The project was born as FRO (Francesco Radio Observatory), a home-built receiver
 
 ---
 
-### The HDF5 v17 format (`.fro` files)
+### The HALO-HDF5 (v17) format — `.fro` files
 
 The format is defined by `fro_format_v17.py` and provides a common HDF5 structure for spectral observations from any telescope. Main groups:
 

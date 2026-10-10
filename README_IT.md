@@ -8,11 +8,11 @@
 
 ### Che cos'è HALO?
 
-HALO è un progetto di radioastronomia amatoriale con sede a Bolzano, con un'ambizione insolita: costruire una **pipeline di dati spettrali indipendente dal telescopio e dal formato**, capace di importare osservazioni da qualsiasi radiotelescopio — da un ricevitore autocostruito fino ai 500 metri di FAST — e di archiviarle in un unico formato HDF5 per l'analisi scientifica.
+HALO è un progetto di radioastronomia amatoriale con sede a Bolzano, con un'ambizione insolita: costruire una **pipeline di dati spettrali indipendente dal telescopio e dal formato**, capace di importare osservazioni da qualsiasi radiotelescopio — da un ricevitore autocostruito fino ai 500 metri di FAST — e di archiviarle in un unico formato, HALO-HDF5, per l'analisi scientifica.
 
 Il progetto è nato come FRO (Francesco Radio Observatory), un ricevitore autocostruito per la riga HI a 21 cm. Da allora è cresciuto ben oltre l'idrogeno: oggi HALO tratta qualsiasi riga spettrale a qualsiasi frequenza, e il nome lo rispecchia.
 
-![HALO — un hub per i dati radioastronomici: telescopi e survey, il formato HDF5 v17 e i moduli](images/HALO_hub_IT.svg)
+![HALO — un hub per i dati radioastronomici: telescopi e survey, il formato HALO-HDF5 (v17) e i moduli](images/HALO_hub_IT.svg)
 
 ---
 
@@ -20,7 +20,7 @@ Il progetto è nato come FRO (Francesco Radio Observatory), un ricevitore autoco
 
 - **Gennaio 2026** — Il progetto inizia. Viene stampata in 3D in PETG una parabola da 1,2 m di diametro con f/D 0,6, più una sezione esterna aggiuntiva che la porta a 1,8 m con f/D 0,4. L'illuminatore, una cantenna, ha dato ottimi risultati al VNA. La parabola è stata completata ma mai assemblata con l'illuminatore: non c'era spazio sul balcone e, nel frattempo, le osservazioni si erano spostate sui radiotelescopi di Onsala. La catena di ricezione — SDR Airspy R2 e LNA Nooelec SawBird H1 — è stata provata con la suite ezRA usando un'antenna Yagi a 5 elementi e un carico fittizio.
 - **Giugno–luglio 2026** — Osservazioni remote del piano galattico con **SALSA** (Onsala Space Observatory, Svezia). Un bug di wrap-around dell'azimut nel sistema di puntamento/integrazione di SALSA, scoperto durante queste sessioni, è stato segnalato e corretto dal team di Onsala lo stesso giorno (v1.1.8). La configurazione del ricevitore locale (8192 canali a 2,5 MSps, Airspy R2) è stata validata, raggiungendo una risoluzione in velocità di circa **64 m/s per canale** a 1420 MHz con hardware di consumo. Prima di HALO, ezRA non supportava l'Airspy R2. Francesco Di Giovanni, con l'aiuto di Claude AI, ha scritto `ezColAirspy`, adattando il programma di acquisizione ezCol di Ted Cline per pilotare l'Airspy R2 tramite SoapySDR. Con `ezColAirspy` l'SDR Airspy R2 si può usare con ezRA.
-- **Estate 2026** — Viene definito il formato HDF5 v17. Parser scritti per **GBT** (Green Bank, 100 m), **FAST/FEASTS** (500 m, il più grande radiotelescopio a parabola singola mai costruito), **HI4PI**, **LAB**, **EBHIS**, **Parkes/GASS** e **JCMT/COHRS** — ¹²CO(3-2) a 345,796 GHz, la prima riga molecolare nella pipeline.
+- **Estate 2026** — Viene definito il formato HALO-HDF5 (v17). Parser scritti per **GBT** (Green Bank, 100 m), **FAST/FEASTS** (500 m, il più grande radiotelescopio a parabola singola mai costruito), **HI4PI**, **LAB**, **EBHIS**, **Parkes/GASS** e **JCMT/COHRS** — ¹²CO(3-2) a 345,796 GHz, la prima riga molecolare nella pipeline.
 - **Agosto 2026** — Primo contatto con **Effelsberg** (MPIfR, Bonn): dati MBFITS reali in HI di **Holmberg I** forniti per lo sviluppo e la validazione del parser.
 - **Settembre 2026** — Mappe HI dell'intero cielo e diagrammi longitudine-velocità dall'intero dataset HI4PI; integrati il catalogo **FASHI DR2** (156.411 sorgenti HI) e il catalogo **ALFALFA α.100**.
 - **Settembre–ottobre 2026** — **Cosmicflows-4** e le griglie di velocità ricostruite **CF4++** (Courtois et al. 2025): verso mappe 3D dei bacini di attrazione (Laniakea, il Grande Attrattore). Analizzando le griglie pubbliche CF4++, HALO ha individuato uno scambio degli assi x/y nelle griglie della velocità radiale (`vr_mean_CF4pp` e `vr_std_CF4pp`). L'errore è stato confermato dalla Dr.ssa Amber Hollinger, e il team CF4++ sta pubblicando un file corretto. Spiegazione: [IT](docs/CF4pp_xy_swap_IT.pdf) · [EN](docs/CF4pp_xy_swap_EN.pdf); diagramma: [IT](images/CF4pp_xy_swap_IT.svg) · [EN](images/CF4pp_xy_swap_EN.svg).
@@ -33,7 +33,7 @@ Il progetto è nato come FRO (Francesco Radio Observatory), un ricevitore autoco
 - **Valori ignoti dichiarati.** Se una grandezza non è misurata o non è definita (ad esempio l'epoca di un prodotto a mosaico), viene dichiarata esplicitamente come sconosciuta, invece di essere riempita con un valore plausibile.
 - **Dati originali della fonte, provenienza tracciata.** I file `.fro` contengono i dati esattamente come forniti dall'osservatorio o dal team della survey. HALO non applica smoothing, sottrazione della linea di base né calibrazioni proprie; le elaborazioni fatte a monte sono registrate nei metadati di provenienza.
 - **Non si butta nulla della sorgente.** Flag di qualità, dati ambientali e parametri di calibrazione vengono conservati all'importazione.
-- **Nessun vincolo di formato.** Il formato HDF5 è il punto di raccolta, non la destinazione. I convertitori di esportazione verso ezRA, SDFITS e altri formati fanno parte della roadmap.
+- **Nessun vincolo di formato.** Il punto di raccolta di HALO è il formato **HALO-HDF5 (v17)**. HDF5 (Hierarchical Data Format, versione 5) è un formato contenitore standard e aperto per dati scientifici, leggibile con qualunque strumento HDF5 (h5py, HDFView e altri). Un file `.fro` è un normale file HDF5 che segue una struttura interna fissa, definita dal modulo `fro_format_v17.py` di HALO: gruppi per spettri, puntamento, tempo, provenienza dei dati, osservatorio, indicatori di qualità, condizioni ambientali, calibrazione, dettagli dell'osservazione e note. L'estensione `.fro` serve solo a riconoscere i file HDF5 che seguono questa struttura. HALO-HDF5 è il punto di raccolta, non la destinazione: il modulo di esportazione [`fro_to_ezra.py`](Moduli/fro_to_ezra/fro_to_ezra.py) converte i file `.fro` nel formato letto da ezRA, così i dati dei radiotelescopi professionali importati in HALO si possono analizzare con ezRA. Provato da capo a fondo (`fro_to_ezra.py` → ezCon): SALSA (Onsala). Per ragioni di tempo gli altri osservatori non sono ancora stati provati in ezRA, anche se il formato li consente: GBT, Effelsberg, FAST/FEASTS, Parkes/GASS, HI4PI, LAB, EBHIS, JCMT/COHRS. ezRA è pensato per la riga HI; altre righe e frequenze (per esempio ¹²CO 3-2 a 345,796 GHz di JCMT/COHRS) sono ancora da verificare. ezRA analizza spettri: FASHI DR2 e ALFALFA α.100 sono cataloghi di galassie con valori già calcolati (posizione, velocità, flusso, distanza), quindi non si possono esportare verso ezRA a meno di ottenere i dati grezzi. Gli spettri ALFALFA o i cubi di dati FASHI si potrebbero allora importare in `.fro` ed esportare verso ezRA. Gli spettri grezzi ALFALFA sono stati richiesti alla Prof.ssa Martha Haynes (Cornell University); si attende ancora una risposta. Cosmicflows-4 (Tully et al. 2023), le griglie ricostruite CF4++ (Courtois et al. 2025) e le immagini del continuo VLASS non contengono spettri e sono esclusi per natura. I convertitori verso SDFITS e altri formati fanno parte della roadmap.
 - **Qualsiasi riga, qualsiasi frequenza.** Dall'HI a 1,4 GHz al ¹²CO(3-2) a 345,796 GHz e oltre.
 
 ---
@@ -60,7 +60,7 @@ Il progetto è nato come FRO (Francesco Radio Observatory), un ricevitore autoco
 
 ---
 
-### Il formato HDF5 v17 (file `.fro`)
+### Il formato HALO-HDF5 (v17) — file `.fro`
 
 Il formato è definito da `fro_format_v17.py` e fornisce una struttura HDF5 comune per osservazioni spettrali di qualsiasi telescopio. Gruppi principali:
 
