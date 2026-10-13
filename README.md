@@ -23,7 +23,7 @@ The project was born as FRO (Francesco Radio Observatory), a home-built receiver
 - **Summer 2026** — The HALO-HDF5 (v17) format is defined. Parsers written for **GBT** (Green Bank, 100 m), **FAST/FEASTS** (500 m, the largest single-dish radio telescope ever built), **HI4PI**, **LAB**, **EBHIS**, **Parkes/GASS** and **JCMT/COHRS** — ¹²CO(3-2) at 345.796 GHz, the first molecular line in the pipeline.
 - **August 2026** — First contact with **Effelsberg** (MPIfR, Bonn): real MBFITS HI data of **Holmberg I** provided for parser development and validation.
 - **September 2026** — All-sky HI maps and longitude-velocity diagrams from the full HI4PI dataset; the **FASHI DR2** catalogue (156,411 HI sources) and the **ALFALFA α.100** catalogue integrated.
-- **September–October 2026** — **Cosmicflows-4** and the **CF4++** reconstructed velocity grids (Courtois et al. 2025): toward 3D maps of the basins of attraction (Laniakea, the Great Attractor). While analysing the public CF4++ grids, HALO found an x/y axis swap in the radial velocity grids (`vr_mean_CF4pp` and `vr_std_CF4pp`). The error was confirmed by Dr. Amber Hollinger, and a corrected file is being released by the CF4++ team. Explanation: [EN](docs/CF4pp_xy_swap_EN.pdf) · [IT](docs/CF4pp_xy_swap_IT.pdf); diagram: [EN](images/CF4pp_xy_swap_EN.svg) · [IT](images/CF4pp_xy_swap_IT.svg).
+- **September–October 2026** — **Cosmicflows-4** and the **CF4++** reconstructed velocity grids (Courtois et al. 2025): toward 3D maps of the basins of attraction (Laniakea, the Great Attractor). While analysing the public CF4++ grids, HALO found an x/y axis swap in the radial velocity grids (`vr_mean_CF4pp` and `vr_std_CF4pp`). The error was confirmed by Dr. Amber Hollinger, and the CF4++ team published a corrected file on 13 October 2026. Explanation: [EN](docs/CF4pp_xy_swap_EN.pdf) · [IT](docs/CF4pp_xy_swap_IT.pdf); diagram: [EN](images/CF4pp_xy_swap_EN.svg) · [IT](images/CF4pp_xy_swap_IT.svg).
 
 ---
 
@@ -59,6 +59,16 @@ The project was born as FRO (Francesco Radio Observatory), a home-built receiver
 | Cosmicflows-4 / CF4++ | — | peculiar velocities, reconstructed velocity field | `cf4_catalog.py`, `cf4_grid.py` |
 
 ---
+
+### Cosmicflows-4 / CF4++ — Laniakea and the Great Attractor
+
+- Basins and density envelopes, interactive 3-D: [laniakea_basins_3d_interactive_EN.html](https://francesco-di-giovanni.github.io/HALO/laniakea_basins_3d_interactive_EN.html)
+- Streamlines of the local Universe, interactive 3-D (rendering after Dupuy & Courtois 2023, A&A, Fig. 1): one streamline per CF4 galaxy, coloured by the basin where it ends; hover a galaxy for its name, click to open SIMBAD, search by name: [laniakea_streamlines_3d_EN.html](https://francesco-di-giovanni.github.io/HALO/laniakea_streamlines_3d_EN.html)
+- Still image and rotating video (18 s): [laniakea_basins_3d_EN.svg](https://francesco-di-giovanni.github.io/HALO/laniakea_basins_3d_EN.svg) · [laniakea_basins_rotation_18s_EN.mp4](https://francesco-di-giovanni.github.io/HALO/laniakea_basins_rotation_18s_EN.mp4)
+
+The two 3-D views answer different questions. In the basin view, flow lines start in under-dense regions (δ < −0.5) and stop where they first reach the δ = +1.5 density iso-surface: they show where matter falls onto the structures. In the streamline view, one line per CF4 galaxy is followed to convergence, as in Dupuy & Courtois 2023 (Fig. 1): the lines cross the overdensities and run along the filaments to the attractors. At δ = +1.5 the Norma–Centaurus region (δ ≈ 1.3) lies just outside the envelopes.
+
+Data: Tully et al. 2023, ApJ 944, 94 (Cosmicflows-4); Courtois et al. 2025, A&A 701, 187 (CF4++ grids). Basins of attraction computed in HALO from the CF4++ velocity potential (not a published product).
 
 ### The HALO-HDF5 (v17) format — `.fro` files
 

@@ -23,7 +23,7 @@ Il progetto è nato come FRO (Francesco Radio Observatory), un ricevitore autoco
 - **Estate 2026** — Viene definito il formato HALO-HDF5 (v17). Parser scritti per **GBT** (Green Bank, 100 m), **FAST/FEASTS** (500 m, il più grande radiotelescopio a parabola singola mai costruito), **HI4PI**, **LAB**, **EBHIS**, **Parkes/GASS** e **JCMT/COHRS** — ¹²CO(3-2) a 345,796 GHz, la prima riga molecolare nella pipeline.
 - **Agosto 2026** — Primo contatto con **Effelsberg** (MPIfR, Bonn): dati MBFITS reali in HI di **Holmberg I** forniti per lo sviluppo e la validazione del parser.
 - **Settembre 2026** — Mappe HI dell'intero cielo e diagrammi longitudine-velocità dall'intero dataset HI4PI; integrati il catalogo **FASHI DR2** (156.411 sorgenti HI) e il catalogo **ALFALFA α.100**.
-- **Settembre–ottobre 2026** — **Cosmicflows-4** e le griglie di velocità ricostruite **CF4++** (Courtois et al. 2025): verso mappe 3D dei bacini di attrazione (Laniakea, il Grande Attrattore). Analizzando le griglie pubbliche CF4++, HALO ha individuato uno scambio degli assi x/y nelle griglie della velocità radiale (`vr_mean_CF4pp` e `vr_std_CF4pp`). L'errore è stato confermato dalla Dr.ssa Amber Hollinger, e il team CF4++ sta pubblicando un file corretto. Spiegazione: [IT](docs/CF4pp_xy_swap_IT.pdf) · [EN](docs/CF4pp_xy_swap_EN.pdf); diagramma: [IT](images/CF4pp_xy_swap_IT.svg) · [EN](images/CF4pp_xy_swap_EN.svg).
+- **Settembre–ottobre 2026** — **Cosmicflows-4** e le griglie di velocità ricostruite **CF4++** (Courtois et al. 2025): verso mappe 3D dei bacini di attrazione (Laniakea, il Grande Attrattore). Analizzando le griglie pubbliche CF4++, HALO ha individuato uno scambio degli assi x/y nelle griglie della velocità radiale (`vr_mean_CF4pp` e `vr_std_CF4pp`). L'errore è stato confermato dalla Dr.ssa Amber Hollinger, e il 13 ottobre 2026 il team CF4++ ha pubblicato un file corretto. Spiegazione: [IT](docs/CF4pp_xy_swap_IT.pdf) · [EN](docs/CF4pp_xy_swap_EN.pdf); diagramma: [IT](images/CF4pp_xy_swap_IT.svg) · [EN](images/CF4pp_xy_swap_EN.svg).
 
 ---
 
@@ -59,6 +59,16 @@ Il progetto è nato come FRO (Francesco Radio Observatory), un ricevitore autoco
 | Cosmicflows-4 / CF4++ | — | velocità peculiari, campo di velocità ricostruito | `cf4_catalog.py`, `cf4_grid.py` |
 
 ---
+
+### Cosmicflows-4 / CF4++ — Laniakea e il Grande Attrattore
+
+- Bacini e inviluppi di densità, 3D interattivo: [laniakea_basins_3d_interactive_EN.html](https://francesco-di-giovanni.github.io/HALO/laniakea_basins_3d_interactive_EN.html)
+- Linee di flusso dell'Universo locale, 3D interattivo (resa ispirata a Dupuy & Courtois 2023, A&A, Fig. 1): una linea per ogni galassia CF4, colorata secondo il bacino in cui finisce; passando il mouse su una galassia compare il nome, con un clic si apre SIMBAD, ricerca per nome: [laniakea_streamlines_3d_EN.html](https://francesco-di-giovanni.github.io/HALO/laniakea_streamlines_3d_EN.html)
+- Immagine fissa e video della rotazione (18 s): [laniakea_basins_3d_EN.svg](https://francesco-di-giovanni.github.io/HALO/laniakea_basins_3d_EN.svg) · [laniakea_basins_rotation_18s_EN.mp4](https://francesco-di-giovanni.github.io/HALO/laniakea_basins_rotation_18s_EN.mp4)
+
+Le due viste 3D rispondono a domande diverse. Nella vista dei bacini le linee di flusso partono dalle regioni sottodense (δ < −0,5) e si fermano dove incontrano per la prima volta la superficie di densità δ = +1,5: mostrano dove la materia cade sulle strutture. Nella vista delle linee di flusso si segue una linea per ogni galassia del catalogo CF4 fino alla convergenza, come nella Fig. 1 di Dupuy & Courtois 2023: le linee attraversano le zone dense e scorrono lungo i filamenti fino agli attrattori. Con δ = +1,5 la regione di Norma e Centaurus (δ ≈ 1,3) resta appena fuori dagli inviluppi.
+
+Dati: Tully et al. 2023, ApJ 944, 94 (Cosmicflows-4); Courtois et al. 2025, A&A 701, 187 (griglie CF4++). Bacini di attrazione calcolati in HALO dal potenziale di velocità CF4++ (non è un prodotto pubblicato).
 
 ### Il formato HALO-HDF5 (v17) — file `.fro`
 
