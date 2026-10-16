@@ -64,7 +64,7 @@ The project was born as FRO (Francesco Radio Observatory), a home-built receiver
 
 - Basins and density envelopes, interactive 3-D: [laniakea_basins_3d_interactive_EN.html](https://francesco-di-giovanni.github.io/HALO/laniakea_basins_3d_interactive_EN.html)
 - Streamlines of the local Universe, interactive 3-D (rendering after Dupuy & Courtois 2023, A&A, Fig. 1): one streamline per CF4 galaxy, coloured by the basin where it ends; hover a galaxy for its name, click to open SIMBAD, search by name: [laniakea_streamlines_3d_EN.html](https://francesco-di-giovanni.github.io/HALO/laniakea_streamlines_3d_EN.html)
-- Still image and rotating video (18 s): [laniakea_basins_3d_EN.svg](https://francesco-di-giovanni.github.io/HALO/laniakea_basins_3d_EN.svg) · [laniakea_basins_rotation_18s_EN.mp4](https://francesco-di-giovanni.github.io/HALO/laniakea_basins_rotation_18s_EN.mp4)
+- Still image and rotating video (22 s): [laniakea_basins_3d_EN.svg](https://francesco-di-giovanni.github.io/HALO/laniakea_basins_3d_EN.svg) · [laniakea_basins_rotation_22s_EN.mp4](https://francesco-di-giovanni.github.io/HALO/laniakea_basins_rotation_22s_EN.mp4)
 
 The two 3-D views answer different questions. In the basin view, flow lines start in under-dense regions (δ < −0.5) and stop where they first reach the δ = +1.5 density iso-surface: they show where matter falls onto the structures. In the streamline view, one line per CF4 galaxy is followed to convergence, as in Dupuy & Courtois 2023 (Fig. 1): the lines cross the overdensities and run along the filaments to the attractors. At δ = +1.5 the Norma–Centaurus region (δ ≈ 1.3) lies just outside the envelopes.
 
