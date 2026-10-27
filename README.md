@@ -112,10 +112,27 @@ The `UNKNOWN_EPOCH` sentinel is used for mosaic products where a per-pixel epoch
 
 ---
 
+### Data sources
+
+This repository contains HALO code, documentation and example plots. Third-party data are not redistributed: please download them from the original archives, which set their own terms of use, and cite the references below. The HALO GPL-3.0 licence applies to the code only, not to third-party data.
+
+| Data | Where to get them | Reference |
+|---|---|---|
+| EBHIS HI profiles | [HI Profile Search, University of Bonn](https://www.astro.uni-bonn.de/hisurvey/AllSky_profiles/) (also used by `download_ebhis.py`) | Winkel et al. 2016, A&A 585, A41 |
+| LAB HI profiles | [HI Profile Search, University of Bonn](https://www.astro.uni-bonn.de/hisurvey/AllSky_profiles/) (also used by `download_lab.py`) | Kalberla et al. 2005, A&A 440, 775 |
+| ATCA archival data (NGC 253) | [Australia Telescope Online Archive (ATOA)](https://atoa.atnf.csiro.au/) | — |
+| THINGS | [THINGS data page, MPIA](https://www.mpia.de/THINGS/Data.html) | Walter et al. 2008, AJ 136, 2563 |
+| VLASS cutouts | CADC, via astroquery | Lacy et al. 2020, PASP 132, 035001 |
+| FAST (M33, KY data) | provided by the FAST team on request; [FAST Data Center](https://fast.bao.ac.cn/) | — |
+
+The SALSA files in `Parsers/SALSA/Surveys/` are the author's own observations with the SALSA telescope (Onsala Space Observatory).
+
+---
+
 ### Roadmap
 
-- Parsers for the Italian radio telescopes: **SRT** (Sardinia Radio Telescope, 64 m, INAF), **Noto** (32 m, INAF) and **Medicina** (32 m, INAF)
-- Parser for **MeerKAT** (South Africa): already written, awaiting real data for validation
+- Parser for the Italian radio telescope **SRT** (Sardinia Radio Telescope, 64 m, INAF)
+- Parsers for **Noto** (32 m, INAF), **Medicina** (32 m, INAF), **MeerKAT** (South Africa) and **WSRT** (Westerbork, Netherlands): already written, awaiting real data for validation
 - 3D visualisation of the cosmic basins of attraction from Cosmicflows-4 / CF4++
 - Export to SDFITS
 - Completion of the SALSA Galactic plane survey

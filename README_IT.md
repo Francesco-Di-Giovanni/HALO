@@ -112,10 +112,27 @@ Il valore sentinella `UNKNOWN_EPOCH` si usa per i prodotti a mosaico in cui l'ep
 
 ---
 
+### Fonti dei dati
+
+Questo repository contiene il codice HALO, la documentazione e grafici di esempio. I dati di terzi non vengono ridistribuiti: vanno scaricati dagli archivi originali, che fissano i propri termini d'uso, citando i riferimenti indicati. La licenza GPL-3.0 di HALO vale solo per il codice, non per i dati di terzi.
+
+| Dati | Dove scaricarli | Riferimento |
+|---|---|---|
+| Profili HI di EBHIS | [HI Profile Search, Università di Bonn](https://www.astro.uni-bonn.de/hisurvey/AllSky_profiles/) (usato anche da `download_ebhis.py`) | Winkel et al. 2016, A&A 585, A41 |
+| Profili HI di LAB | [HI Profile Search, Università di Bonn](https://www.astro.uni-bonn.de/hisurvey/AllSky_profiles/) (usato anche da `download_lab.py`) | Kalberla et al. 2005, A&A 440, 775 |
+| Dati d'archivio ATCA (NGC 253) | [Australia Telescope Online Archive (ATOA)](https://atoa.atnf.csiro.au/) | — |
+| THINGS | [Pagina dati THINGS, MPIA](https://www.mpia.de/THINGS/Data.html) | Walter et al. 2008, AJ 136, 2563 |
+| Cutout VLASS | CADC, tramite astroquery | Lacy et al. 2020, PASP 132, 035001 |
+| FAST (M33, dati KY) | forniti dal team FAST su richiesta; [FAST Data Center](https://fast.bao.ac.cn/) | — |
+
+I file SALSA in `Parsers/SALSA/Surveys/` sono osservazioni dell'autore con il radiotelescopio SALSA (Onsala Space Observatory).
+
+---
+
 ### Roadmap
 
-- Parser per i radiotelescopi italiani: **SRT** (Sardinia Radio Telescope, 64 m, INAF), **Noto** (32 m, INAF) e **Medicina** (32 m, INAF)
-- Parser per **MeerKAT** (Sudafrica): già scritto, in attesa di dati reali per la verifica
+- Parser per il radiotelescopio italiano **SRT** (Sardinia Radio Telescope, 64 m, INAF)
+- Parser per **Noto** (32 m, INAF), **Medicina** (32 m, INAF), **MeerKAT** (Sudafrica) e **WSRT** (Westerbork, Paesi Bassi): già scritti, in attesa di dati reali per la verifica
 - Visualizzazione 3D dei bacini di attrazione cosmici da Cosmicflows-4 / CF4++
 - Esportazione in SDFITS
 - Completamento della survey SALSA del piano galattico
