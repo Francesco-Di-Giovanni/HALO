@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Copyright (c) 2026 Francesco Di Giovanni — HALO Project
-# Released under MIT License
+# Released under GPL-3.0-or-later (see LICENSE)
 # https://github.com/Francesco-Di-Giovanni/HALO
 #
 # view_fashi_3d.py — Interactive 3D viewer for the FASHI DR2 extragalactic HI catalog
