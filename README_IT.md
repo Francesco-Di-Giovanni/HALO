@@ -115,6 +115,7 @@ Il valore sentinella `UNKNOWN_EPOCH` si usa per i prodotti a mosaico in cui l'ep
 ### Roadmap
 
 - Parser per i radiotelescopi italiani: **SRT** (Sardinia Radio Telescope, 64 m, INAF), **Noto** (32 m, INAF) e **Medicina** (32 m, INAF)
+- Parser per **MeerKAT** (Sudafrica): già scritto, in attesa di dati reali per la verifica
 - Visualizzazione 3D dei bacini di attrazione cosmici da Cosmicflows-4 / CF4++
 - Esportazione in SDFITS
 - Completamento della survey SALSA del piano galattico

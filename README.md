@@ -115,6 +115,7 @@ The `UNKNOWN_EPOCH` sentinel is used for mosaic products where a per-pixel epoch
 ### Roadmap
 
 - Parsers for the Italian radio telescopes: **SRT** (Sardinia Radio Telescope, 64 m, INAF), **Noto** (32 m, INAF) and **Medicina** (32 m, INAF)
+- Parser for **MeerKAT** (South Africa): already written, awaiting real data for validation
 - 3D visualisation of the cosmic basins of attraction from Cosmicflows-4 / CF4++
 - Export to SDFITS
 - Completion of the SALSA Galactic plane survey
