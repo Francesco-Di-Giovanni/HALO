@@ -1,0 +1,26 @@
+{
+  "OH127.8+0.0": {
+    "aliases": [
+      "V669 Cas",
+      "IRAS 01304+6211"
+    ],
+    "line_window_kms": [
+      -75.0,
+      -35.0
+    ],
+    "peaks_kms": [
+      [
+        -65.9,
+        "blue peak"
+      ],
+      [
+        -43.65,
+        "red peak"
+      ]
+    ],
+    "reference": "Wolak et al. 2013",
+    "glon_deg": 127.8,
+    "glat_deg": 0.0,
+    "survey": "OH127.8+0.0 1612 MHz campaign"
+  }
+}
